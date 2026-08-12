@@ -1,0 +1,23 @@
+title: AgentTesla JavaScript Execution via WScript
+id: 1253cd62-92f9-4d63-adb1-fdc76a0ea262
+status: experimental
+description: Detects suspicious Explorer execution spawned by WScript associated with AgentTesla activity.
+references:
+    - https://x.com/bomccss/status/2085374321133002962
+    - https://tria.ge/260806-b3yc9a1cme/
+author: k_k
+date: 2026-08-12
+tags:
+    - attack.execution
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        Image|endswith: "\\explorer.exe"
+        CommandLine|contains: "C:\\Antimilita"
+        ParentImage|endswith: "\\wscript.exe"
+    condition: selection
+falsepositives:
+    - Unknown
+level: high
